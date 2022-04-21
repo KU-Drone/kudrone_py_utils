@@ -203,6 +203,23 @@ def extrapolate_htm(stamp1, htm1, stamp2, htm2, target_stamp):
 
     return pos_rot_to_htm(new_position, new_rotation)
 
+def only_z_rot(matrix):
+    shape = np.shape(matrix)
+    assert shape == (3,3) or shape == (4,4), f"Invalid shape {shape}, expected (3,3) or (4,4)"
+    x_len = m.sqrt(matrix[0][0]**2 + matrix[0][1]**2)
+    y_len = m.sqrt(matrix[1][0]**2 + matrix[1][1]**2)
 
+    ret = np.copy(matrix)
+    if shape == (4,4):
+        ret[:,0] = ret[:,0]/x_len
+        ret[:,1] = ret[:,1]/y_len
+        ret[:,2] = np.array([[0,0,1,0]])
+        ret[2,0:2] = np.array([0,0])
+    elif shape == (3,3):
+        ret[:,0] = ret[:,0]/x_len
+        ret[:,1] = ret[:,1]/y_len
+        ret[:,2] = np.array([[0,0,1]])
+        ret[2,0:2] = np.array([0,0])
+    return ret
 
 
