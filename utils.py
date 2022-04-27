@@ -222,4 +222,10 @@ def only_z_rot(matrix):
         ret[2,0:2] = np.array([0,0])
     return ret
 
+def putTextCenter(img, text, org, fontFace, fontScale, color, thickness=None,lineType=None):
+    textsize = cv2.getTextSize(text, fontFace, fontScale, thickness)[0]
 
+    # get coords based on boundary
+    textX = org[0] - (textsize[0]) // 2
+    textY = org[1] + (textsize[1]) // 2
+    return cv2.putText(img, text, (textX, textY), fontFace, fontScale, color, thickness=thickness,lineType=lineType)
