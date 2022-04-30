@@ -229,3 +229,10 @@ def putTextCenter(img, text, org, fontFace, fontScale, color, thickness=None,lin
     textX = org[0] - (textsize[0]) // 2
     textY = org[1] + (textsize[1]) // 2
     return cv2.putText(img, text, (textX, textY), fontFace, fontScale, color, thickness=thickness,lineType=lineType)
+
+def points_to_htm_multipliable_points(points):
+    assert type(points) == np.array or (type(points) == np.ndarray and len(np.shape(points))==2), f"Point must be np.array or np.ndarray with 2 dimentions, not {type(points)}"
+    return np.vstack((points, np.ones((1, np.shape(points)[1]))))
+
+def htm_multipliable_points_to_points(htm_multipliable_points):
+    return htm_multipliable_points[0:-1]
