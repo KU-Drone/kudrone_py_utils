@@ -87,6 +87,14 @@ def geometry_msgs_TransformStamped_to_htm(transform_stamped):
     rot = [rot.x, rot.y, rot.z, rot.w]
     return ts.concatenate_matrices(ts.translation_matrix(trans), ts.quaternion_matrix(rot))
 
+def nav_msgs_Odometry_to_htm(odometry):
+    trans = odometry.pose.pose.position
+    rot = odometry.pose.pose.orientation
+    trans = [trans.x, trans.y, trans.z]
+    rot = [rot.x, rot.y, rot.z, rot.w]
+    return ts.concatenate_matrices(ts.translation_matrix(trans), ts.quaternion_matrix(rot))
+
+
 def vertical_to_horizontal_fov(width, height, vertical_fov):
     f = (height/2)*m.tan(vertical_fov)
     return 2*m.atan(width/2/f)
