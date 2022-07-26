@@ -3,6 +3,7 @@ import numpy as np
 import tf.transformations as ts
 import cv2
 import rospy
+import time
 
 def project_points(pts, camera_position):
     xc = camera_position[0][0]
@@ -128,10 +129,10 @@ class Times():
         self.add("begin")
 
     def add(self):
-        self.times.append((str(len(self.times)), rospy.Time.now()))
+        self.times.append((str(len(self.times)), time.perf_counter()))
     
     def add(self, name):
-        self.times.append((str(name), rospy.Time.now()))
+        self.times.append((str(name), time.perf_counter()))
     
     def __str__(self):
         ret = ""
