@@ -27,15 +27,15 @@ class Transformation(object):
         return Transformation(Rotation((q_x, q_y, q_z, q_w)), np.array((p_x, p_y, p_z)).reshape(3,1))
 
     @staticmethod
-    def from_TransformStamped(transform:TransformStamped) -> Transformation:
-        q_w = transform.transform.rotation.w
-        q_x = transform.transform.rotation.x
-        q_y = transform.transform.rotation.y
-        q_z = transform.transform.rotation.z
+    def from_TransformStamped(transform_stamped:TransformStamped) -> Transformation:
+        q_w = transform_stamped.transform.rotation.w
+        q_x = transform_stamped.transform.rotation.x
+        q_y = transform_stamped.transform.rotation.y
+        q_z = transform_stamped.transform.rotation.z
 
-        p_x = transform.transform.translation.x
-        p_y = transform.transform.translation.y
-        p_z = transform.transform.translation.z
+        p_x = transform_stamped.transform.translation.x
+        p_y = transform_stamped.transform.translation.y
+        p_z = transform_stamped.transform.translation.z
 
         return Transformation(Rotation((q_x, q_y, q_z, q_w)), np.array((p_x, p_y, p_z)).reshape(3,1))
 
