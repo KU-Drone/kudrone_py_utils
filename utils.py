@@ -136,10 +136,10 @@ class Times():
     
     def __str__(self):
         ret = ""
-        dt = duration_to_sec(self.times[-1][1]-self.times[0][1])
+        dt = self.times[-1][1]-self.times[0][1]
         for i in range(1,len(self.times)):
-            ret += "{:s}: {:.2f}%\n".format(self.times[i][0], duration_to_sec(self.times[i][1]-self.times[i-1][1])/dt*100)
-        ret += "Total: {:.2f}, {:.2f} hz\n".format(dt, 1/dt)
+            ret += "{:s}: {:.4f}s {:.2f}%\n".format(self.times[i][0], (self.times[i][1]-self.times[i-1][1]), (self.times[i][1]-self.times[i-1][1])/dt*100)
+        ret += "Total: {:.4f}, {:.2f} hz\n".format(dt, 1/dt)
         return ret
 
 # Calculates Rotation Matrix given euler angles.
